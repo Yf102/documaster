@@ -1,5 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block body %}
-    {{ react_component('Login', {'props': props|merge({'path': asset('login')})}) }}
+	{{ react_component('Login', {'props': props|merge({'path': asset('login')})}) }}
 {% endblock %}
