@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="Documaster" defaultPhpNamingMethod="underscore"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd">
+
+    <table name="USERS" idMethod="native" phpName="Users">
+        <column name="ID" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="USER_PASS" phpName="UserPass" type="VARCHAR" size="255" required="true"/>
+        <column name="USER_EMAIL" phpName="UserEmail" type="VARCHAR" size="255" required="true"/>
+        <column name="FIRST_NAME" phpName="FirstName" type="VARCHAR" size="255" required="true"/>
+        <column name="LAST_NAME" phpName="LastName" type="VARCHAR" size="255" required="true"/>
+        <column name="USER_PHONE" phpName="UserPhone" type="VARCHAR" size="255"/>
+
+        <unique name="USERS__u_cba401">
+            <unique-column name="USER_EMAIL" size="255"/>
+        </unique>
+
+        <behavior name="timestampable" />
+        <behavior name="validate">
+            <!-- Email -->
+            <parameter name="rule1" value="{column: user_email, validator: Email, options: {message: Invalid email address}}"/>
+            <parameter name="rule2" value="{column: user_email, validator: NotNull, options: {message: Email missing}}"/>
+            <parameter name="rule3" value="{column: user_email, validator: NotBlank, options: {message: Email missing}}"/>
+            <!-- First name -->
+            <parameter name="rule4" value="{column: first_name, validator: Length, options: {min: 1, max: 255}}"/>
+            <parameter name="rule5" value="{column: first_name, validator: NotNull, options: {message: Fname missing}}"/>
+            <parameter name="rule6" value="{column: first_name, validator: NotBlank, options: {message: Fname missing}}"/>
+            <!-- Last name -->
+            <parameter name="rule7" value="{column: last_name, validator: Length, options: {min: 2, max: 255}}"/>
+            <parameter name="rule8" value="{column: last_name, validator: NotNull, options: {message: Lname missing}}"/>
+            <parameter name="rule9" value="{column: last_name, validator: NotBlank, options: {message: Lname missing}}"/>
+            <!-- User Role -->
+            <parameter name="rule13" value="{column: user_role, validator: Choice, options: {choices: [admin, orgAdmin, user], message: Incorrect user role}}"/>
+            <parameter name="rule14" value="{column: user_role, validator: NotNull, options: {message: User role missing}}"/>
+            <parameter name="rule15" value="{column: user_role, validator: NotBlank, options: {message: User role missing}}"/>
+        </behavior>
+    </table>
+</database>

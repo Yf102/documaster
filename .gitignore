@@ -23,3 +23,10 @@ yarn-error.log
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+## ORM/DB related
+src/orm/Documaster/Base
+src/orm/Documaster/Map
+src/orm/generated-conf
+src/orm/generated-sql/
+propel

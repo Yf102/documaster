@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4267c2c4be8e1a66ce73d02cc98c2fd6",
+    "content-hash": "95d47051123a802fda850b18586bae6f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1573,16 +1573,16 @@
         },
         {
             "name": "propel/propel",
-            "version": "2.0.0-alpha8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/propelorm/Propel2.git",
-                "reference": "4c309e3e5adaba077f54c0fab93c34995d7c9b3d"
+                "reference": "6c4996fc130c7555d82d9dca04396c6f3eeef306"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/propelorm/Propel2/zipball/4c309e3e5adaba077f54c0fab93c34995d7c9b3d",
-                "reference": "4c309e3e5adaba077f54c0fab93c34995d7c9b3d",
+                "url": "https://api.github.com/repos/propelorm/Propel2/zipball/6c4996fc130c7555d82d9dca04396c6f3eeef306",
+                "reference": "6c4996fc130c7555d82d9dca04396c6f3eeef306",
                 "shasum": ""
             },
             "require": {
@@ -1633,7 +1633,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2018-02-19T12:58:55+00:00"
+            "time": "2018-02-19T13:36:42+00:00"
         },
         {
             "name": "psr/cache",
@@ -5881,7 +5881,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "propel/propel": 15,
+        "propel/propel": 20,
         "symfony/lts": 20
     },
     "prefer-stable": false,
