@@ -14,7 +14,7 @@ This is an example application using Symfony, React and PostgreSQL.
     * user: postgres
     * pass: Ecp123
 
-## Creating the API
+## Setting up the web application
 
 1. Get composer:
 

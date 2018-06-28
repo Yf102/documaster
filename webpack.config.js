@@ -10,7 +10,7 @@ Encore
     // will output as web/build/app.js
     .addEntry('app', ['babel-polyfill', './assets/js/entryPoint.js'])
     // will output as web/build/app.css
-    // .addStyleEntry('css/main', './assets/sass/layout.scss')
+    .addStyleEntry('css/main', './assets/sass/main.scss')
     // allow sass/scss files to be processed
     .enableSassLoader()
     // allow legacy applications to use $/jQuery as a global variable
