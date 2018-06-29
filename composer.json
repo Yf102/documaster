@@ -46,7 +46,10 @@
         },
         "classmap": [
             "src/orm/Documaster/"
-        ]
+        ],
+		"files": [
+			"lib/config.php"
+		]
     },
     "autoload-dev": {
         "psr-4": {
