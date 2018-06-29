@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use Documaster\UsersQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,15 +24,28 @@ class SecurityController extends Controller
 	 */
 	public function login(Request $request)
 	{
-		$username = $request->get("_usernamer");
+		$username = $request->get("_username");
 		$password = $request->get("_password");
 
-
-		// get the login error if there is one
 		$error = null;
-
-		// last username entered by the user
 		$lastUsername = $username;
+
+		if($request->isMethod("POST")) {
+			$user = UsersQuery::create()->findOneByUserEmail($username);
+			if(empty($user)) {
+				// TODO: Server Log
+				$error = "No such user";
+			} else if($password !== $user->getUserPass()) {
+				// TODO: Server Log
+				$error = "Email or password is wrong";
+			} else {
+				// start session for user
+				$_SESSION['user_mail'] = $username;
+				$_SESSION['user_id'] = $user->getId();
+
+				return $this->redirectToRoute('app_main');
+			}
+		}
 
 		return $this->render('security/login.html.twig', array(
 			"props" => array(
@@ -39,5 +53,15 @@ class SecurityController extends Controller
 				'error' => $error
 			),
 		));
+	}
+
+
+	/**
+	 * @Route("/logout", name="logout")
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
+	public function logout() {
+		session_unset();
+		return $this->redirectToRoute('login');
 	}
 }
