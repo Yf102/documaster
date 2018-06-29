@@ -1,0 +1,11 @@
+{
+	"language": "English",
+	"switch_locale": "Change Language",
+	"drop_down_lbl": "Classes",
+
+	"username_lbl": "Username",
+	"password_lbl": "Password",
+	"login_btn": "Login",
+
+	"logout_btn": "Logout"
+}

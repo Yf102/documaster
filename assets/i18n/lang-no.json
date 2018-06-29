@@ -1,0 +1,11 @@
+{
+	"language": "Norsk",
+	"switch_locale": "Skifte språk",
+	"drop_down_lbl": "Klasser",
+
+	"username_lbl": "Brukernavn",
+	"password_lbl": "Passord",
+	"login_btn": "Logg Inn",
+
+	"logout_btn": "Logg ut"
+}

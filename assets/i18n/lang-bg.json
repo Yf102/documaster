@@ -1,0 +1,11 @@
+{
+	"language": "Български",
+	"switch_locale": "Смени езика",
+	"drop_down_lbl": "Класове",
+
+	"username_lbl": "Емейл",
+	"password_lbl": "Парола",
+	"login_btn": "Логин",
+
+	"logout_btn": "Излез"
+}
