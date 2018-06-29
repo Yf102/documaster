@@ -8,20 +8,32 @@
 
 namespace App\EventSubscriber;
 
-
 use App\Controller\TokenAuthenticatedController;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class TokenSubscriber implements EventSubscriberInterface
 {
-    public function __construct()
-    {
+	protected $app;
+	private $router;
 
+    public function __construct(RouterInterface $r)
+    {
+    	$this->app = new \DocumasterApp();
+    	$this->router = $r;
     }
+
+    public function onKernelRequest() {
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+	}
 
     // Event for before controller execution
     public function onKernelController(FilterControllerEvent $event)
@@ -38,9 +50,21 @@ class TokenSubscriber implements EventSubscriberInterface
         }
 
         if ($controller[0] instanceof TokenAuthenticatedController) {
-            // TODO: Validate if logged in
+        	if(is_null($this->app->curUser())) {
+				throw new AccessDeniedHttpException('This action requires login!');
+			}
         }
     }
+
+    public function onKernelException(GetResponseForExceptionEvent $event) {
+    	$exception = $event->getException();
+    	if($exception instanceof AccessDeniedHttpException) {
+			$url = $this->router->generate("login");
+			$response = new RedirectResponse($url);
+			$event->setResponse($response);
+		}
+	}
+
 
     // Event for after controller execution
     public function onKernelResponse(FilterResponseEvent $event)
@@ -52,7 +76,9 @@ class TokenSubscriber implements EventSubscriberInterface
     {
         return array(
             KernelEvents::CONTROLLER => 'onKernelController',
-            KernelEvents::RESPONSE => 'onKernelResponse'
+            KernelEvents::RESPONSE => 'onKernelResponse',
+			KernelEvents::EXCEPTION => 'onKernelException',
+			KernelEvents::REQUEST => 'onKernelRequest'
         );
     }
 }
