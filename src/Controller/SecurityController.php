@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use Documaster\UsersQuery;
+use Httpful\Httpful;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,11 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SecurityController extends Controller
 {
-
 	/**
 	 * @Route("/login", name="login")
 	 * @param Request $request
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 * @throws \Httpful\Exception\ConnectionErrorException
 	 */
 	public function login(Request $request)
 	{
@@ -42,6 +43,7 @@ class SecurityController extends Controller
 				// start session for user
 				$_SESSION['user_mail'] = $username;
 				$_SESSION['user_id'] = $user->getId();
+				$_SESSION["user_token"] = $this->createToken();
 
 				return $this->redirectToRoute('app_main');
 			}
@@ -53,6 +55,28 @@ class SecurityController extends Controller
 				'error' => $error
 			),
 		));
+	}
+
+	/**
+	 * @throws \Httpful\Exception\ConnectionErrorException
+	 */
+	private function createToken() {
+		$params = array(
+			"realUserId" => "1",
+			"effectiveUserId" => "1",
+			"name" => "John Doe",
+			"roles" => array("admin"),
+			"accessCodes" => array(),
+			"accessCodesGrant" => array()
+		);
+
+		$resp = \Httpful\Request::post("http://206.189.10.120:8083/dots/v1/create-token")
+			->contentType("application/json")
+			->addHeader("Accept", "text/plain")
+			->body($params)
+			->send();
+
+		return $resp->body;
 	}
 
 

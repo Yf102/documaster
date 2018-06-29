@@ -10,6 +10,9 @@ class DocumasterApp
 {
 	private $_curUser = null;
 
+	/**
+	 * @return \Documaster\Users|null
+	 */
 	public function curUser()
 	{
 		// have loaded the user already?
@@ -24,5 +27,12 @@ class DocumasterApp
 
 		$this->_curUser =	\Documaster\UsersQuery::create()->findOneByUserEmail($email);
 		return $this->_curUser;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function userToken() {
+		return isset($_SESSION['user_token']) ? $_SESSION['user_token'] : null;
 	}
 }
