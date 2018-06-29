@@ -38,3 +38,6 @@ This is an example application using Symfony, React and PostgreSQL.
   	```
     php composer.phar update
 	```
+
+## Links
+	https://www.npmjs.com/package/react-translate-component
