@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 require __DIR__.'/../vendor/autoload.php';
 
+// Spawn ORM DB Connection
+require_once(SRC_DIR . "/orm/generated-conf/config.php");
+
 // The check is to ensure we don't use .env in production
 if (!isset($_SERVER['APP_ENV'])) {
     if (!class_exists(Dotenv::class)) {

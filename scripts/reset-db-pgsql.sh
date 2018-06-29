@@ -13,5 +13,6 @@ vendor/bin/propel model:build
 vendor/bin/propel sql:build
 
 # Create insert init values and migrate all changes
+vendor/bin/propel sql:insert
 vendor/bin/propel sql:insert $PROPEL_PARAMS
 vendor/bin/propel migrate

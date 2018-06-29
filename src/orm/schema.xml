@@ -3,16 +3,16 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd">
 
-    <table name="USERS" idMethod="native" phpName="Users">
-        <column name="ID" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-        <column name="USER_PASS" phpName="UserPass" type="VARCHAR" size="255" required="true"/>
-        <column name="USER_EMAIL" phpName="UserEmail" type="VARCHAR" size="255" required="true"/>
-        <column name="FIRST_NAME" phpName="FirstName" type="VARCHAR" size="255" required="true"/>
-        <column name="LAST_NAME" phpName="LastName" type="VARCHAR" size="255" required="true"/>
-        <column name="USER_PHONE" phpName="UserPhone" type="VARCHAR" size="255"/>
+    <table name="users" idMethod="native" phpName="Users">
+        <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="user_pass" phpName="UserPass" type="VARCHAR" size="255" required="true"/>
+        <column name="user_email" phpName="UserEmail" type="VARCHAR" size="255" required="true"/>
+        <column name="first_name" phpName="FirstName" type="VARCHAR" size="255" required="true"/>
+        <column name="last_name" phpName="LastName" type="VARCHAR" size="255" required="true"/>
+        <column name="user_phone" phpName="UserPhone" type="VARCHAR" size="255"/>
 
         <unique name="USERS__u_cba401">
-            <unique-column name="USER_EMAIL" size="255"/>
+            <unique-column name="user_email" size="255"/>
         </unique>
 
         <behavior name="timestampable" />
@@ -29,10 +29,6 @@
             <parameter name="rule7" value="{column: last_name, validator: Length, options: {min: 2, max: 255}}"/>
             <parameter name="rule8" value="{column: last_name, validator: NotNull, options: {message: Lname missing}}"/>
             <parameter name="rule9" value="{column: last_name, validator: NotBlank, options: {message: Lname missing}}"/>
-            <!-- User Role -->
-            <parameter name="rule13" value="{column: user_role, validator: Choice, options: {choices: [admin, orgAdmin, user], message: Incorrect user role}}"/>
-            <parameter name="rule14" value="{column: user_role, validator: NotNull, options: {message: User role missing}}"/>
-            <parameter name="rule15" value="{column: user_role, validator: NotBlank, options: {message: User role missing}}"/>
         </behavior>
     </table>
 </database>

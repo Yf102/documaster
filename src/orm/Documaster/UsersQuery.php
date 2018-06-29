@@ -5,7 +5,7 @@ namespace Documaster;
 use Documaster\Base\UsersQuery as BaseUsersQuery;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'USERS' table.
+ * Skeleton subclass for performing query and update operations on the 'users' table.
  *
  *
  *
@@ -16,4 +16,5 @@ use Documaster\Base\UsersQuery as BaseUsersQuery;
  */
 class UsersQuery extends BaseUsersQuery
 {
+
 }

@@ -5,7 +5,7 @@ namespace Documaster;
 use Documaster\Base\Users as BaseUsers;
 
 /**
- * Skeleton subclass for representing a row from the 'USERS' table.
+ * Skeleton subclass for representing a row from the 'users' table.
  *
  *
  *
