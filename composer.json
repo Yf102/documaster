@@ -48,7 +48,8 @@
             "src/orm/Documaster/"
         ],
 		"files": [
-			"lib/config.php"
+			"lib/config.php",
+			"src/App.php"
 		]
     },
     "autoload-dev": {
