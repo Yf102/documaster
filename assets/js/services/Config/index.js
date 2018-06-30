@@ -4,7 +4,7 @@ import {Storage} from '../../services/Storage/index.js';
 
 const CONFIG_STORAGE_KEY = 'app-config';
 
-class Config extends React.Component{
+class Config extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = this.props.config;
@@ -53,19 +53,21 @@ class Config extends React.Component{
 	render() {
 		return (
 			<div className={"config-wrapper"}>
-				{this.props.children.map((child, i) => {
-					if(child.type === 'div') {
-						return child;
-					}
-
-					return React.cloneElement(child, {
-						key: i,
-						config: this.state.config,
-						changeHandlers: {
-							changeLanguageHandler: (e) => this.handleChangeSetting(e, "locale")
+				{
+					this.props.children.map((child, i) => {
+						if(child.type === 'div') {
+							return child;
 						}
-					});
-				})}
+
+						return React.cloneElement(child, {
+							key: i,
+							config: this.state.config,
+							changeHandlers: {
+								changeLanguageHandler: (e) => this.handleChangeSetting(e, "locale")
+							}
+						});
+					})
+				}
 			</div>
 		);
 	}
