@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<span>Hola</span>
+	{{ react_component('App', {'props': props|merge({'server_search': path('server_search')}), 'rendering': 'client_side'}) }}
 {% endblock %}
 
