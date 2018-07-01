@@ -33,10 +33,9 @@ This is an example application using Symfony, React and PostgreSQL.
 	```
 	sh scripts/reset-db-pgsql.sh
 	```
-	
-4. Update composer with new DB models
-  	```
-    php composer.phar update
+4. Prepare composer autoload
+	```
+	php composer.phar dumpautoload
 	```
 
 ## Links
