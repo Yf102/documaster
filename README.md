@@ -41,3 +41,4 @@ This is an example application using Symfony, React and PostgreSQL.
 
 ## Links
 	https://www.npmjs.com/package/react-translate-component
+	https://github.com/jedwatson/react-select
