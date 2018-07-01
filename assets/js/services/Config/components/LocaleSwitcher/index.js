@@ -1,6 +1,7 @@
 import React from 'react';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
+import Select from 'react-select';
 
 class LocaleSwitcher extends React.Component {
 	constructor(props) {
@@ -11,23 +12,46 @@ class LocaleSwitcher extends React.Component {
 	render() {
 		return (
 			<div className="language-wrapper">
-				<label htmlFor="locale_switcher"><Translate content="switch_locale" />:</label>
-				<LangSlider config={this.props.config} handleChange={this.props.changeHandlers.changeLanguageHandler}/>
+				<label className="locale_switcher_lbl" htmlFor="locale_switcher"><Translate content="switch_locale" />:</label>
+				<div className="lang-slider">
+					<LangSlider config={this.props.config} handleChange={this.props.changeHandlers.changeLanguageHandler}/>
+				</div>
 			</div>
 		);
 	}
 }
 
 class LangSlider extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = this.props.config;
+
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleChange(selectedOption) {
+		this.setState({ locale: selectedOption.value });
+		// selectedOption can be null when the `x` (close) button is clicked
+		this.props.handleChange(selectedOption);
+	}
+
 	render() {
 		const languages = counterpart.getAvailableLocales();
+		let options = [];
+		languages.map((lang, i) => {
+			let langVal = counterpart.translate('language', { locale: lang });
+			options.push({value: lang, label: langVal, clearableValue: false})
+		});
+
 		return (
-			<select id="locale_switcher" onChange={this.props.handleChange} value={this.props.config.locale}>
-				{languages.map((lang, i) => {
-					let langVal = counterpart.translate('language', { locale: lang });
-					return <option key={i} value={lang}>{langVal}</option>;
-				})}
-			</select>
+			<Select
+				clearable={false}
+				searchable={false}
+				name="form-field-name"
+				value={this.state.locale}
+				onChange={this.handleChange}
+				options={options}
+			/>
 		);
 	}
 }

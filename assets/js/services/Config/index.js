@@ -11,7 +11,7 @@ class Config extends React.Component {
 		this._save();
 		counterpart.setLocale(this.get("locale"));
 
-		this.handleChangeSetting = this.handleChangeSetting.bind(this);
+		this.handleLangChange = this.handleLangChange.bind(this);
 	}
 
 	// Get config value for key
@@ -33,9 +33,9 @@ class Config extends React.Component {
 		});
 	}
 
-	handleChangeSetting(e, setting) {
+	handleLangChange(option, setting) {
 		let previous = this.state.config[setting];
-		let value = e.target.options[e.target.selectedIndex].value;
+		let value = option.value;
 		let config = this.state.config;
 		if (previous != value) {
 			config[setting] = value;
@@ -63,7 +63,7 @@ class Config extends React.Component {
 							key: i,
 							config: this.state.config,
 							changeHandlers: {
-								changeLanguageHandler: (e) => this.handleChangeSetting(e, "locale")
+								changeLanguageHandler: (option) => this.handleLangChange(option, "locale")
 							}
 						});
 					})

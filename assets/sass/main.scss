@@ -1,10 +1,17 @@
 .language-wrapper {
 	display: flex;
-	flex-direction: column;
-	width: 125px;
-	height: 40px;
-	justify-content: space-between;
+	width: 270px;
+	height: 35px;
+	justify-content: flex-end;
 	float: left;
+}
+.locale_switcher_lbl {
+	display: flex;
+	align-items: center;
+	margin-right: 6px;
+}
+.lang-slider {
+	width: 140px;
 }
 
 .search-wrapper {
