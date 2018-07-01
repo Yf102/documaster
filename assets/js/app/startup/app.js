@@ -11,13 +11,22 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			config: Storage.get('app-config') || { config: {locale: 'en'} }
+			config: this.getConfig()
 		};
 
 		this.searchService = new SearchService(this.props.server_search);
 
 		counterpart.setLocale(this.state.config.config.locale);
 		this.updateConfigState = this.updateConfigState.bind(this);
+	}
+
+	componentDidMount() {
+		// Needed to override server side rendering
+		document.getElementById("search-bar").setAttribute("placeholder", counterpart("drop_down_lbl"));
+	}
+
+	getConfig() {
+		return Storage.get('app-config') || { config: {locale: 'en'} }
 	}
 
 	updateConfigState(config) {
@@ -42,12 +51,27 @@ class App extends React.Component {
 					</div>
 					<div className="search-wrapper">
 						<img src="https://www.documaster.com/hubfs/Documaster-Jan2017/Images/logo.svg?t=1530269875029" alt="Documaster Logo" className="documaster-blue" />
-						<input id="search-bar" type="text" onFocus={this.inputOnFocus} onBlur={this.inputOnFocusOut} placeholder={counterpart("drop_down_lbl")} onKeyUp={this.searchService.filterData}/>
+						<SearchInput onFocus={this.inputOnFocus} onBlur={this.inputOnFocusOut} placeholder={counterpart("drop_down_lbl")} onKeyUp={this.searchService.filterData}/>
 						<SearchMenu searchService={this.searchService}/>
 					</div>
 				</Config>
 			</div>
 		)
+	}
+}
+
+class SearchInput extends React.Component {
+	render() {
+		return(
+			<input
+				id="search-bar"
+				type="text"
+				onFocus={this.props.onFocus}
+				onBlur={this.props.onBlur}
+				placeholder={this.props.placeholder}
+				onKeyUp={this.props.onKeyUp}
+			/>
+		);
 	}
 }
 
