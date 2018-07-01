@@ -1,55 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-	{#<input type="text" />#}
-
-	{#<div class="menu">#}
-		{#<ul class="mainlayer" id="category1">#}
-			{#<li class="layer1"><a href="#" onclick="func();">item1</a>#}
-				{#<ul>#}
-					{#<li class="layer2"><a href="#"  onclick="func1();">hju11</a></li>#}
-					{#<li class="layer2"><a>kiu12</a></li>#}
-				{#</ul>#}
-			{#</li>#}
-			{#<li class="layer1"><a>item2</a></li>#}
-			{#<li class="layer1"><a> item3</a></li>#}
-		{#</ul>#}
-	{#</div>#}
-
-	<script>
-		{#function func(){#}
-			{#alert("Onclick function parent node...");#}
-		{#}#}
-
-		{#function func1(){#}
-			{#alert("Onclick function child node...");#}
-		{#}#}
-
-		{#$(document).ready(function() {#}
-
-			$('input[type="text"]').keyup(function(){
-
-				var filter = $(this).val();
-				$(".menu ul > li").removeClass("hide");
-				$(".menu ul > li").removeClass("show");
-
-				$(".menu ul > li").each(function () {
-					if ($(this).text().search(new RegExp(filter, "i")) < 0 && !$(this).hasClass('show')) {
-						$(this).addClass('hide');
-					} else {
-						$(this).addClass('show');
-						$(this).find(' ul > li').addClass('show');
-
-					}
-				});
-			});
-
-		{#});#}
-	</script>
-
 	{% set obj = {'server_search': path('server_search'), 'logout_url': path('logout')} %}
-
-	{{ react_component('App', {'props': props|merge(obj), 'rendering': 'client_side'}) }}
+	{#{{ react_component('App', {'props': props|merge(obj), 'rendering': 'client_side'}) }}#}
+	{{ react_component('App', {'props': props|merge(obj)}) }}
 {% endblock %}
 

@@ -3,7 +3,7 @@
 class SearchService {
 	constructor(server_search) {
 		// this.server_search = server_search;
-		this.server_search = "{{ path('server_search') }}";
+		this.server_search = server_search;
 		this.data = null;
 	}
 
@@ -30,23 +30,19 @@ class SearchService {
 
 		for(let i = 0; i < li_els.length; i++) {
 			let el = li_els[i];
-			el.classList.remove("hide");
-			el.classList.remove("show");
+			el.classList.remove("display-none");
 
-			
+			if(el.textContent.search(new RegExp(filter, "i")) < 0) {
+				el.classList.add("display-none");
+			} else {
+				el.classList.remove("display-none");
+
+				let childEls = el.querySelectorAll("ul > li");
+				for(let j = 0; j < childEls.length; j++) {
+					childEls[j].classList.remove("display-none");
+				}
+			}
 		}
-		// $(".search-menu ul > li").removeClass("hide");
-		// $(".search-menu ul > li").removeClass("show");
-        //
-		// $(".menu ul > li").each(function () {
-		// 	if ($(this).text().search(new RegExp(filter, "i")) < 0 && !$(this).hasClass('show')) {
-		// 		$(this).addClass('hide');
-		// 	} else {
-		// 		$(this).addClass('show');
-		// 		$(this).find(' ul > li').addClass('show');
-        //
-		// 	}
-		// });
 	}
 }
 
