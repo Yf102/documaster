@@ -2,7 +2,6 @@
 
 {% block body %}
 	{% set obj = {'server_search': path('server_search'), 'logout_url': path('logout')} %}
-	{#{{ react_component('App', {'props': props|merge(obj), 'rendering': 'client_side'}) }}#}
 	{{ react_component('App', {'props': props|merge(obj)}) }}
 {% endblock %}
 
