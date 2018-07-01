@@ -31,7 +31,7 @@ This is an example application using Symfony, React and PostgreSQL.
     ```
 3. Prepare DB
 	```
-	sh scripts/reset-db-sqlite.sh
+	sh scripts/reset-db-pgsql.sh
 	```
 	
 4. Update composer with new DB models
